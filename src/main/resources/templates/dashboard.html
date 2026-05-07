@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Quản lý công việc</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #F4F5F7; min-height: 100vh; }
+
+        /* Navbar */
+        .navbar {
+            background: #0079BF;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+        .navbar-brand { font-size: 1.2rem; font-weight: bold; }
+        .navbar-user { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
+        .avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 0.85rem; color: white;
+        }
+        .btn-logout {
+            background: rgba(255,255,255,0.2);
+            color: white; border: none; padding: 0.4rem 0.9rem;
+            border-radius: 4px; cursor: pointer; font-size: 0.85rem;
+            text-decoration: none;
+        }
+        .btn-logout:hover { background: rgba(255,255,255,0.35); }
+
+        /* Main content */
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
+        h2 { color: #172B4D; margin-bottom: 1.5rem; font-size: 1.3rem; }
+
+        /* Board grid */
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .board-card {
+            background: #0079BF;
+            color: white;
+            border-radius: 6px;
+            padding: 1rem;
+            height: 100px;
+            display: flex;
+            align-items: flex-start;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+        .board-card:hover { opacity: 0.85; }
+        .board-card-new {
+            background: #E2E4E9;
+            color: #555;
+            border-radius: 6px;
+            padding: 1rem;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            transition: background 0.15s;
+        }
+        .board-card-new:hover { background: #C9CDD4; }
+
+        .empty-msg { color: #888; font-size: 0.95rem; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-brand">🔷 Quản lý công việc</div>
+    <div class="navbar-user">
+        <div class="avatar" th:style="'background:' + ${user.avatarColor}"
+             th:text="${#strings.toUpperCase(#strings.substring(user.fullName, 0, 1))}"></div>
+        <span th:text="${user.fullName}"></span>
+        <a th:href="@{/auth/logout}" class="btn-logout">Đăng xuất</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Boards của bạn</h2>
+    <div class="board-grid">
+        <!-- Boards sẽ hiển thị ở đây (Phase 3) -->
+        <p class="empty-msg">Chưa có board nào. Hãy tạo board đầu tiên!</p>
+        <button class="board-card-new" onclick="alert('')">
+            + Tạo board mới
+        </button>
+    </div>
+</div>
+
+</body>
+</html>
